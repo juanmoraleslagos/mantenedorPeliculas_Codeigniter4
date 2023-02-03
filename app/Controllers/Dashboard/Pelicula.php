@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
 use App\Models\PeliculaModel;
+use App\Controllers\BaseController;
 
 class Pelicula extends BaseController
 {
@@ -14,7 +15,7 @@ class Pelicula extends BaseController
         $pelicula = $peliculaModel->find($id);
 
         //Renderizando Vista.
-        return view('pelicula/show', [
+        return view('/dashboard/pelicula/show', [
             'pelicula'  => $pelicula,
         ]);
     }
@@ -30,7 +31,7 @@ class Pelicula extends BaseController
         ];
 
         //Renderizando Vista.
-        return view('pelicula/new', $data);
+        return view('/dashboard/pelicula/new', $data);
     }
 
     public function create()
@@ -47,7 +48,7 @@ class Pelicula extends BaseController
         // Insertando Nuevo Registro En Base De Datos.
         $peliculaModel->insert($data);
 
-        echo 'Registro Creado';
+        return redirect()->to('/dashboard/pelicula');
     }
 
     public function edit($id)
@@ -57,7 +58,7 @@ class Pelicula extends BaseController
         $pelicula = $peliculaModel->find($id);
 
         // Enviando Datos A La Vista.
-        return view('pelicula/edit', [
+        return view('/dashboard/pelicula/edit', [
             'pelicula' => $pelicula
         ]);
     }
@@ -76,7 +77,7 @@ class Pelicula extends BaseController
         // Actualizando Datos.
         $peliculaModel->update($id, $data);
 
-        echo 'Actualizando Datos';
+        return redirect()->to('/dashboard/pelicula');
     }
 
     public function delete($id)
@@ -85,7 +86,7 @@ class Pelicula extends BaseController
         $peliculaModel = new PeliculaModel();
         $peliculaModel->delete($id);
 
-        echo "REGISTRO ELIMINADO";
+        return redirect()->back();
     }
 
     public function index()
@@ -95,7 +96,7 @@ class Pelicula extends BaseController
         $peliculas = $peliculaModel->findAll();
 
         // Enviando Datos A La Vista.
-        return view('pelicula/index', [
+        return view('/dashboard/pelicula/index', [
             'peliculas'  => $peliculas,
         ]);
     }

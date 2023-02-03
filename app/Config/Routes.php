@@ -36,8 +36,11 @@ $routes->set404Override();
 //$routes->get('pelicula','Pelicula::index');
 //$routes->get('pelicula/new','Pelicula::create');
 
-$routes->presenter('pelicula');
-$routes->presenter('categoria');
+// Agrupando Rutas.
+$routes->group('dashboard', function ($routes) {
+    $routes->presenter('pelicula', ['controller' => 'Dashboard\Pelicula']);
+    $routes->presenter('categoria',['controller' => 'Dashboard\Categoria']);
+});
 
 /*
  * --------------------------------------------------------------------

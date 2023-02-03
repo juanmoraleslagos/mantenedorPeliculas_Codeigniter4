@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Dashboard;
 
 use App\Models\CategoriaModel;
+use App\Controllers\BaseController;
+
 
 class Categoria extends BaseController
 {
@@ -14,7 +16,7 @@ class Categoria extends BaseController
         $categorias = $categoriaModel->findAll();
 
         // Enviando Datos A La Vista.
-        return view('categoria/index', [
+        return view('/dashboard/categoria/index', [
             'categorias'  => $categorias,
         ]);
     }
@@ -29,7 +31,7 @@ class Categoria extends BaseController
         ];
 
         //Renderizando Vista.
-        return view('categoria/new', $data);
+        return view('/dashboard/categoria/new', $data);
     }
 
     public function create()
@@ -45,7 +47,7 @@ class Categoria extends BaseController
         // Insertando Nuevo Registro En Base De Datos.
         $categoriaModel->insert($data);
 
-        echo 'Registro Creado';
+        return redirect()->to('/dashboard/pelicula');
     }
 
     public function show($id)
@@ -55,7 +57,7 @@ class Categoria extends BaseController
         $categoria = $categoriaModel->find($id);
 
         //Renderizando Vista.
-        return view('categoria/show', [
+        return view('/dashboard/categoria/show', [
             'categoria'  => $categoria,
         ]);
     }
@@ -66,7 +68,7 @@ class Categoria extends BaseController
         $categoriaModel = new CategoriaModel();
         $categoriaModel->delete($id);
 
-        echo "REGISTRO ELIMINADO";
+        return redirect()->back();
     }
 
     public function edit($id)
@@ -76,7 +78,7 @@ class Categoria extends BaseController
         $categoria = $categoriaModel->find($id);
 
         // Enviando Datos A La Vista.
-        return view('categoria/edit', [
+        return view('/dashboard/categoria/edit', [
             'categoria' => $categoria
         ]);
     }
@@ -94,6 +96,6 @@ class Categoria extends BaseController
         // Actualizando Datos.
         $categoriaModel->update($id, $data);
 
-        echo 'Actualizando Datos';
+        return redirect()->to('/dashboard/pelicula');
     }
 }

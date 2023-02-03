@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Películas</title>
+    <title>Categorías</title>
 </head>
 
 <body>
-    <h1>Listado Películas</h1>
+    <h1>Listado Categorías</h1>
 
-    <a href="/pelicula/new">Crear</a>
+    <a href="/dashboard/categoria/new">Crear</a>
 
     <table>
         <tr>
@@ -22,23 +22,19 @@
                 Título
             </th>
             <th>
-                Descripción
-            </th>
-            <th>
                 Opciones
             </th>
         </tr>
-        <?php foreach ($peliculas as $key => $pelicula) : ?>
+        <?php foreach ($categorias as $key => $categoria) : ?>
             <tr>
-                <td><?php echo $pelicula['id']; ?></td>
-                <td><?php echo $pelicula['titulo']; ?></td>
-                <td><?php echo $pelicula['descripcion']; ?></td>
+                <td><?php echo $categoria['id']; ?></td>
+                <td><?php echo $categoria['titulo']; ?></td>
                 <td>
-                    <a href="/pelicula/show/<?php echo $pelicula['id']; ?>">Mostrar</a>
-                    <a href="/pelicula/edit/<?php echo $pelicula['id']; ?>">Editar</a>
+                    <a href="/dashboard/categoria/show/<?php echo $categoria['id']; ?>">Mostrar</a>
+                    <a href="/dashboard/categoria/edit/<?php echo $categoria['id']; ?>">Editar</a>
 
                     <!-- Creando Formulario Para Eliminar -->
-                    <form action="/pelicula/delete/<?php echo $pelicula['id']; ?>" method="POST">
+                    <form action="/dashboard/categoria/delete/<?php echo $categoria['id']; ?>" method="POST">
                         <button type="submit">Borrar</button>
                     </form>
                 </td>
