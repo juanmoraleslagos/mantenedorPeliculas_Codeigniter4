@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!-- incluyendo layout -->
+    <?php $this->extend('Layouts/dashboard'); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $categoria['titulo']; ?></title>
-</head>
+    <!-- Mostrando Contenido -->
+    <?php $this->section('contenido'); ?>
 
-<body>
+    <!-- incluyendo información categoría -->
     <h1><?php echo $categoria['titulo']; ?></h1>
-</body>
 
-</html>
+    <?php $this->endSection(); ?>

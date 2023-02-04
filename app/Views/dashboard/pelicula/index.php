@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!-- Incluyendo Layout -->
+    <?php $this->extend('Layouts/dashboard'); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Películas</title>
-</head>
+    <?php $this->section('header'); ?>
+    Listado De Películas
+    <?php $this->endSection(); ?>
 
-<body>
-    <h1>Listado Películas</h1>
-
-    <!-- Incluyendo Mensaje Flash -->
-    <?php echo view('helpers/session'); ?>
+    <!-- Mostrando Contenido -->
+    <?php $this->section('contenido'); ?>
 
     <a href="/dashboard/pelicula/new">Crear</a>
 
@@ -48,6 +42,5 @@
             </tr>
         <?php endforeach; ?>
     </table>
-</body>
 
-</html>
+    <?php $this->endSection(); ?>

@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!-- incluyendo layout -->
+    <?php $this->extend('Layouts/dashboard'); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $pelicula['titulo']; ?></title>
-</head>
+    <!-- Mostrando Contenido -->
+    <?php $this->section('contenido'); ?>
 
-<body>
+    <!-- incluyendo información categoría -->
     <h1><?php echo $pelicula['titulo']; ?></h1>
     <p><?php echo $pelicula['descripcion']; ?></p>
-</body>
 
-</html>
+    <?php $this->endSection(); ?>
