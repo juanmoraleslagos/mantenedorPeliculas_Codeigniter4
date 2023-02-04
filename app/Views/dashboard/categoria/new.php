@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <!-- Incluyendo Mensaje Flash -->
+    <?php echo view('helpers/session') ?>
+
     <!-- Formulario Creación Película -->
     <form action="/dashboard/categoria/create" method="POST">
 

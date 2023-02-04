@@ -11,6 +11,9 @@
 <body>
     <h1>Listado Películas</h1>
 
+    <!-- Incluyendo Mensaje Flash -->
+    <?php echo view('helpers/session'); ?>
+
     <a href="/dashboard/pelicula/new">Crear</a>
 
     <table>
@@ -40,7 +43,7 @@
                     <!-- Creando Formulario Para Eliminar -->
                     <form action="/dashboard/pelicula/delete/<?php echo $pelicula['id']; ?>" method="POST">
                         <button type="submit">Borrar</button>
-                    </form>                   
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -11,6 +11,9 @@
 <body>
     <h1>Listado Categorías</h1>
 
+    <!-- Incluyendo Mensaje Flash -->
+    <?php echo view('helpers/session'); ?>
+
     <a href="/dashboard/categoria/new">Crear</a>
 
     <table>

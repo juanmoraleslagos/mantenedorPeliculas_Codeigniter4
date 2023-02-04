@@ -41,13 +41,13 @@ class Categoria extends BaseController
 
         // Creando Data.
         $data = [
-            'titulo'      => $this->request->getPost('titulo'),            
+            'titulo'      => $this->request->getPost('titulo'),
         ];
 
         // Insertando Nuevo Registro En Base De Datos.
         $categoriaModel->insert($data);
 
-        return redirect()->to('/dashboard/pelicula');
+        return redirect()->to('/dashboard/categoria')->with('mensaje', 'Registro Creado De Manera Exitosa');
     }
 
     public function show($id)
@@ -68,7 +68,7 @@ class Categoria extends BaseController
         $categoriaModel = new CategoriaModel();
         $categoriaModel->delete($id);
 
-        return redirect()->back();
+        return redirect()->back()->with('mensaje', 'Registro Borrado De Manera Exitosa');
     }
 
     public function edit($id)
@@ -90,12 +90,12 @@ class Categoria extends BaseController
 
         // Creando La Data.
         $data = [
-            'titulo'      => $this->request->getPost('titulo'),            
+            'titulo'      => $this->request->getPost('titulo'),
         ];
 
         // Actualizando Datos.
         $categoriaModel->update($id, $data);
 
-        return redirect()->to('/dashboard/pelicula');
+        return redirect()->to('/dashboard/categoria')->with('mensaje', 'Registro Actualizado De Manera Exitosa');
     }
 }

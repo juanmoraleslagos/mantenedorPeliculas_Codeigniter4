@@ -48,7 +48,7 @@ class Pelicula extends BaseController
         // Insertando Nuevo Registro En Base De Datos.
         $peliculaModel->insert($data);
 
-        return redirect()->to('/dashboard/pelicula');
+        return redirect()->to('/dashboard/pelicula')->with('mensaje', 'Registro Creado De Manera Exitosa');
     }
 
     public function edit($id)
@@ -77,7 +77,7 @@ class Pelicula extends BaseController
         // Actualizando Datos.
         $peliculaModel->update($id, $data);
 
-        return redirect()->to('/dashboard/pelicula');
+        return redirect()->to('/dashboard/pelicula')->with('mensaje', 'Registro Actualizado De Manera Exitosa');
     }
 
     public function delete($id)
@@ -86,7 +86,7 @@ class Pelicula extends BaseController
         $peliculaModel = new PeliculaModel();
         $peliculaModel->delete($id);
 
-        return redirect()->back();
+        return redirect()->back()->with('mensaje', 'Registro Borrado De Manera Exitosa');
     }
 
     public function index()
