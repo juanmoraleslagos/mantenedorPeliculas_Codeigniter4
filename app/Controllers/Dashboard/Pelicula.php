@@ -39,15 +39,25 @@ class Pelicula extends BaseController
         // Creando Instancia.
         $peliculaModel = new PeliculaModel();
 
-        // Creando Data.
-        $data = [
-            'titulo'      => $this->request->getPost('titulo'),
-            'descripcion' => $this->request->getPost('descripcion'),
-        ];
+        // validando campos formulario.
+        if ($this->validate('peliculas')) {
+            // Creando Data.
+            $data = [
+                'titulo'      => $this->request->getPost('titulo'),
+                'descripcion' => $this->request->getPost('descripcion'),
+            ];
+            // Insertando Nuevo Registro En Base De Datos.
+            $peliculaModel->insert($data);
+        } else {
+            session()->setFlashdata([
+                'validation' => $this->validator
+            ]);
 
-        // Insertando Nuevo Registro En Base De Datos.
-        $peliculaModel->insert($data);
+            // redireccionando.
+            return redirect()->back()->withInput();
+        }
 
+        // redireccionando.
         return redirect()->to('/dashboard/pelicula')->with('mensaje', 'Registro Creado De Manera Exitosa');
     }
 
@@ -68,16 +78,25 @@ class Pelicula extends BaseController
         // Instanciando Y Ocupando Métodos.
         $peliculaModel = new PeliculaModel();
 
-        // Creando La Data.
-        $data = [
-            'titulo'      => $this->request->getPost('titulo'),
-            'descripcion' => $this->request->getPost('descripcion'),
-        ];
+        // validando campos formulario.        
+        if ($this->validate('peliculas')) {
+            // Creando La Data.
+            $data = [
+                'titulo'      => $this->request->getPost('titulo'),
+                'descripcion' => $this->request->getPost('descripcion'),
+            ];
+            // Actualizando Datos.
+            $peliculaModel->update($id, $data);
+        } else {
+            session()->setFlashdata([
+                'validation' => $this->validator
+            ]);
 
-        // Actualizando Datos.
-        $peliculaModel->update($id, $data);
+            // redireccionando.
+            return redirect()->back()->withInput();
+        }
 
-        return redirect()->to('/dashboard/pelicula')->with('mensaje', 'Registro Actualizado De Manera Exitosa');
+        return redirect()->back()->with('mensaje', 'Registro Actualizado De Manera Exitosa');
     }
 
     public function delete($id)

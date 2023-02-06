@@ -39,14 +39,24 @@ class Categoria extends BaseController
         // Creando Instancia.
         $categoriaModel = new CategoriaModel();
 
-        // Creando Data.
-        $data = [
-            'titulo'      => $this->request->getPost('titulo'),
-        ];
+        // validando campos formulario.
+        if ($this->validate('categorias')) {
+            // Creando Data.
+            $data = [
+                'titulo'      => $this->request->getPost('titulo'),
+            ];
+            // Insertando Nuevo Registro En Base De Datos.
+            $categoriaModel->insert($data);
+        } else {
+            session()->setFlashdata([
+                'validation' => $this->validator
+            ]);
 
-        // Insertando Nuevo Registro En Base De Datos.
-        $categoriaModel->insert($data);
+            // redirección.
+            return redirect()->back()->withInput();
+        }
 
+        // redireccionando.
         return redirect()->to('/dashboard/categoria')->with('mensaje', 'Registro Creado De Manera Exitosa');
     }
 
@@ -88,14 +98,24 @@ class Categoria extends BaseController
         // Instanciando Y Ocupando Métodos.
         $categoriaModel = new CategoriaModel();
 
-        // Creando La Data.
-        $data = [
-            'titulo'      => $this->request->getPost('titulo'),
-        ];
+        // validando campos formulario.
+        if ($this->validate('categorias')) {
+            // Creando La Data.
+            $data = [
+                'titulo'      => $this->request->getPost('titulo'),
+            ];
+            // Actualizando Datos.
+            $categoriaModel->update($id, $data);
+        } else {
+            session()->setFlashdata([
+                'validation' => $this->validator
+            ]);
 
-        // Actualizando Datos.
-        $categoriaModel->update($id, $data);
+            // redireccionando.
+            return redirect()->back()->withInput();
+        }
 
+        // redireccionando.
         return redirect()->to('/dashboard/categoria')->with('mensaje', 'Registro Actualizado De Manera Exitosa');
     }
 }
