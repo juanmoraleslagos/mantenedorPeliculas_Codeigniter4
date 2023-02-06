@@ -27,15 +27,15 @@
         </tr>
         <?php foreach ($peliculas as $key => $pelicula) : ?>
             <tr>
-                <td><?php echo $pelicula['id']; ?></td>
-                <td><?php echo $pelicula['titulo']; ?></td>
-                <td><?php echo $pelicula['descripcion']; ?></td>
+                <td><?php echo $pelicula->id; ?></td>
+                <td><?php echo $pelicula->titulo; ?></td>
+                <td><?php echo $pelicula->descripcion; ?></td>
                 <td>
-                    <a href="/dashboard/pelicula/show/<?php echo $pelicula['id']; ?>">Mostrar</a>
-                    <a href="/dashboard/pelicula/edit/<?php echo $pelicula['id']; ?>">Editar</a>
+                    <a href="/dashboard/pelicula/show/<?php echo $pelicula->id; ?>">Mostrar</a>
+                    <a href="/dashboard/pelicula/edit/<?php echo $pelicula->id; ?>">Editar</a>
 
                     <!-- Creando Formulario Para Eliminar -->
-                    <form action="/dashboard/pelicula/delete/<?php echo $pelicula['id']; ?>" method="POST">
+                    <form action="/dashboard/pelicula/delete/<?php echo $pelicula->id; ?>" method="POST">
                         <button type="submit">Borrar</button>
                     </form>
                 </td>

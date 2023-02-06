@@ -24,11 +24,8 @@ class Pelicula extends BaseController
     {
         // Creando Data.
         $data = [
-            'pelicula' => [
-                'titulo'      => '',
-                'descripcion' => '',
-            ]
-        ];
+            'pelicula' => new PeliculaModel()
+        ];        
 
         //Renderizando Vista.
         return view('/dashboard/pelicula/new', $data);
@@ -112,7 +109,7 @@ class Pelicula extends BaseController
     {
         // Instanciando Y Ocupando Metodos.
         $peliculaModel = new PeliculaModel();
-        $peliculas = $peliculaModel->findAll();
+        $peliculas = $peliculaModel->asObject()->findAll();
 
         // Enviando Datos A La Vista.
         return view('/dashboard/pelicula/index', [

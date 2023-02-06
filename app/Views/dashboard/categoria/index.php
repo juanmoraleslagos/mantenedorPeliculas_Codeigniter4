@@ -23,14 +23,14 @@
         </tr>
         <?php foreach ($categorias as $key => $categoria) : ?>
             <tr>
-                <td><?php echo $categoria['id']; ?></td>
-                <td><?php echo $categoria['titulo']; ?></td>
+                <td><?php echo $categoria->id; ?></td>
+                <td><?php echo $categoria->titulo; ?></td>
                 <td>
-                    <a href="/dashboard/categoria/show/<?php echo $categoria['id']; ?>">Mostrar</a>
-                    <a href="/dashboard/categoria/edit/<?php echo $categoria['id']; ?>">Editar</a>
+                    <a href="/dashboard/categoria/show/<?php echo $categoria->id; ?>">Mostrar</a>
+                    <a href="/dashboard/categoria/edit/<?php echo $categoria->id; ?>">Editar</a>
 
                     <!-- Creando Formulario Para Eliminar -->
-                    <form action="/dashboard/categoria/delete/<?php echo $categoria['id']; ?>" method="POST">
+                    <form action="/dashboard/categoria/delete/<?php echo $categoria->id; ?>" method="POST">
                         <button type="submit">Borrar</button>
                     </form>
                 </td>

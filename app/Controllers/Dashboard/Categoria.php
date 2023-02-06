@@ -25,9 +25,7 @@ class Categoria extends BaseController
     {
         // Creando Data.
         $data = [
-            'categoria' => [
-                'titulo'      => '',
-            ]
+            'categoria' => new CategoriaModel()
         ];
 
         //Renderizando Vista.
