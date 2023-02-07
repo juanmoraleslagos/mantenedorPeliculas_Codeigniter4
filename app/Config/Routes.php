@@ -36,11 +36,20 @@ $routes->set404Override();
 //$routes->get('pelicula','Pelicula::index');
 //$routes->get('pelicula/new','Pelicula::create');
 
-// Agrupando Rutas.
+// Agrupando Rutas Categorías-Películas.
 $routes->group('dashboard', function ($routes) {
     $routes->presenter('pelicula', ['controller' => 'Dashboard\Pelicula']);
-    $routes->presenter('categoria',['controller' => 'Dashboard\Categoria']);
+    $routes->presenter('categoria', ['controller' => 'Dashboard\Categoria']);
 });
+
+// Agrupando Rutas Login.
+$routes->get('login', '\App\Controllers\Web\Usuario::login', ['as' => 'usuario.login']);
+$routes->post('login_post', '\App\Controllers\Web\Usuario::login_post', ['as' => 'usuario.login_post']);
+
+$routes->get('register', '\App\Controllers\Web\Usuario::register', ['as' => 'usuario.register']);
+$routes->post('register_post', '\App\Controllers\Web\Usuario::register_post', ['as' => 'usuario.register_post']);
+
+$routes->get('logout', '\App\Controllers\Web\Usuario::logout', ['as' => 'usuario.logout']);
 
 /*
  * --------------------------------------------------------------------

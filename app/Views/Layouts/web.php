@@ -5,13 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo De Dashboard</title>
+    <title>Módulo Web</title>
 </head>
 
 <body>
-    <!-- Renderizando Header -->
-    <h1><?php echo $this->renderSection('header'); ?></h1>
-
     <!-- Incluyendo Mensaje Flash -->
     <?php echo view('helpers/session'); ?>
 
