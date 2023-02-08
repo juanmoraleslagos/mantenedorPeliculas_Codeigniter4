@@ -31,10 +31,11 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
 
-// Creando Rutas Crud.
-
-//$routes->get('pelicula','Pelicula::index');
-//$routes->get('pelicula/new','Pelicula::create');
+// agrupando rutas APIRest.
+$routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes) {
+    $routes->resource('pelicula');
+    $routes->resource('categoria');
+});
 
 // Agrupando Rutas Categorías-Películas.
 $routes->group('dashboard', function ($routes) {
@@ -50,6 +51,8 @@ $routes->get('register', '\App\Controllers\Web\Usuario::register', ['as' => 'usu
 $routes->post('register_post', '\App\Controllers\Web\Usuario::register_post', ['as' => 'usuario.register_post']);
 
 $routes->get('logout', '\App\Controllers\Web\Usuario::logout', ['as' => 'usuario.logout']);
+
+
 
 /*
  * --------------------------------------------------------------------
