@@ -30,7 +30,7 @@ class Pelicula extends ResourceController
             // Insertando Nuevo Registro En Base De Datos.
             $id = $this->model->insert($data);
         } else {
-            
+
             // obteniendo errores particulares.
             if ($this->validator->getError('titulo')) {
                 return $this->respond($this->validator->getError('titulo'), 400);
@@ -72,4 +72,5 @@ class Pelicula extends ResourceController
         $this->model->delete($id);
         return $this->respond('Ok');
     }
+
 }

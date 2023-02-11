@@ -11,5 +11,6 @@ class TodoSeeder extends Seeder
         // usando funcion de ayuda.
         $this->call('CategoriaSeeder');
         $this->call('PeliculaSeeder');
+        $this->call('EtiquetaSeeder');
     }
 }

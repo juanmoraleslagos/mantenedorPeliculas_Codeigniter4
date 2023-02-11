@@ -17,7 +17,7 @@ class CategoriaSeeder extends Seeder
         $categoriaModel->where('id >=', 1)->delete();
 
         // generado e insertando semillas.
-        for ($i = 0; $i <= 20; $i++) {
+        for ($i = 0; $i <= 10; $i++) {
             $data = [
                 'titulo' => "Categoría $i"
             ];

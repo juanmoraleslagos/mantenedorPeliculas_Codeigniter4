@@ -39,7 +39,12 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
 
 // Agrupando Rutas Categorías-Películas.
 $routes->group('dashboard', function ($routes) {
+    $routes->get('pelicula/etiqueta/(:num)', 'Dashboard\Pelicula::etiquetas/$1', ['as' => 'pelicula.etiquetas']);
+    $routes->post('pelicula/etiqueta/(:num)', 'Dashboard\Pelicula::etiquetas_post/$1', ['as' => 'pelicula.etiquetas']);
+    $routes->post('pelicula/(:num)/etiqueta/(:num)/delete', 'Dashboard\Pelicula::etiqueta_delete/$1/$2', ['as' => 'pelicula.etiqueta_delete']);
+
     $routes->presenter('pelicula', ['controller' => 'Dashboard\Pelicula']);
+    $routes->presenter('etiqueta', ['controller' => 'Dashboard\Etiqueta']);
     $routes->presenter('categoria', ['controller' => 'Dashboard\Categoria']);
 });
 

@@ -19,6 +19,9 @@
                 Título
             </th>
             <th>
+                Categoría
+            </th>
+            <th>
                 Descripción
             </th>
             <th>
@@ -29,10 +32,12 @@
             <tr>
                 <td><?php echo $pelicula->id; ?></td>
                 <td><?php echo $pelicula->titulo; ?></td>
+                <td><?php echo $pelicula->categoria; ?></td>
                 <td><?php echo $pelicula->descripcion; ?></td>
                 <td>
                     <a href="/dashboard/pelicula/show/<?php echo $pelicula->id; ?>">Mostrar</a>
                     <a href="/dashboard/pelicula/edit/<?php echo $pelicula->id; ?>">Editar</a>
+                    <a href="<?= route_to('pelicula.etiquetas', $pelicula->id); ?>">Etiquetas</a>
 
                     <!-- Creando Formulario Para Eliminar -->
                     <form action="/dashboard/pelicula/delete/<?php echo $pelicula->id; ?>" method="POST">
