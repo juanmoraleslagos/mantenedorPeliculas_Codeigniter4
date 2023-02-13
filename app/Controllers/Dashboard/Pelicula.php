@@ -7,9 +7,10 @@ use App\Models\EtiquetaModel;
 use App\Models\PeliculaModel;
 use App\Models\CategoriaModel;
 use App\Controllers\BaseController;
-use App\Database\Migrations\PeliculaEtiquetas;
-use App\Models\PeliculaEtiquetaModel;
 use App\Models\PeliculaImagenModel;
+use App\Models\PeliculaEtiquetaModel;
+use App\Database\Migrations\PeliculaEtiquetas;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Pelicula extends BaseController
 {
@@ -108,6 +109,9 @@ class Pelicula extends BaseController
             ];
             // Actualizando Datos.
             $peliculaModel->update($id, $data);
+
+            // llamando funcion de imagen.
+            $this->asignar_imagen($id);
         } else {
             session()->setFlashdata([
                 'validation' => $this->validator
@@ -218,30 +222,118 @@ class Pelicula extends BaseController
             ->delete();
 
         // redireccionando.
-        return redirect()->back()->with('mensaje','Etiqueta Eliminada');
+        return redirect()->back()->with('mensaje', 'Etiqueta Eliminada');
     }
 
-    private function generar_imagen()
+    public function descargar_imagen($imagenId)
     {
         $imagenModel = new ImagenModel();
 
-        $data = [
-            'imagen'    => date('Y-m-d H:m:s'),
-            'extension' => 'Pendiente',
-            'data'      => 'Pendiente'
-        ];
+        $imagen = $imagenModel->find($imagenId);
 
-        $imagenModel->insert($data);
+        if ($imagen == null) {
+            return 'No Exite Imagen';
+        }
+
+        $imagenRuta = 'uploads/peliculas/' . $imagen->imagen;
+
+        return $this->response->download($imagenRuta, null)->setFileName('imagen.png');
     }
-    private function asignar_imagen()
+
+    public function borrar_imagen($imagenId)
     {
+        $imagenModel         = new ImagenModel();
         $peliculaImagenModel = new PeliculaImagenModel();
 
-        $data = [
-            'imagen_id'   => 1,
-            'pelicula_id' => 43
-        ];
+        // buscando imagen.
+        $imagen = $imagenModel->find($imagenId);
+        // borrar archivo.
+        if ($imagen == null) {
+            return 'No Exite Imagen';
+        }
+        // eliminando imagen.
+        $imagenRuta = 'uploads/peliculas/' . $imagen->imagen;
+        unlink($imagenRuta);
 
-        $peliculaImagenModel->insert($data);
+        // eliminando imagen desde tabla pivote.
+        $peliculaImagenModel->where('imagen_id', $imagenId)->delete();
+        // eliminando imagen desde tabla imagen.
+        $imagenModel->delete($imagenId);
+
+        return redirect()->back()->with('mensaje', 'Imagen Eliminada');
+    }
+
+
+    private function asignar_imagen($peliculaId)
+    {
+        // verificando existencia de una imagen.
+        $imagefile = $this->request->getFile('imagen');
+
+        if ($imagefile) {
+            // realizando proceso de upload.
+            if ($imagefile->isValid()) {
+
+                // verificar que archivo sea imagen.
+                $validated = $this->validate([
+                    'uploaded[imagen]',
+                    'mime_in[imagen,image/jpg,image/gif,image/png]',
+                    'max_size[imagen,4096]'
+                ]);
+
+                // verificando cumplimiento de validaciones.
+                if ($validated) {
+                    $imageNombre = $imagefile->getRandomName();
+                    $extension   = $imagefile->guessExtension();
+
+                    $imagefile->move('../public/uploads/peliculas', $imageNombre);
+
+                    // guardando imagen en BD-> imagen.
+                    $imagenModel = new ImagenModel();
+                    $data = [
+                        'imagen'    => $imageNombre,
+                        'extension' => $extension,
+                        'data'      => 'Pendiente'
+                    ];
+                    $imagenId = $imagenModel->insert($data);
+
+                    // insertando en BD-> peliculaImagen - tabla pivote.
+                    $peliculaImagenModel = new PeliculaImagenModel();
+
+                    // creando data.
+                    $dataPeliculaImagen = [
+                        'imagen_id'   => $imagenId,
+                        'pelicula_id' => $peliculaId
+                    ];
+
+                    $peliculaImagenModel->insert($dataPeliculaImagen);
+                }
+
+                return $this->validator->listErrors();
+            }
+        }
+    }
+
+    function image($image)
+    {
+        // abre el archivo en modo binario.
+        if (!$image) {
+            $image = $this->request->getGet('image');
+        }
+
+        $name = WRITEPATH . 'uploads/peliculas/' . $image;
+
+        if (!file_exists($name)) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $fp = fopen($name, 'rb');
+
+        // envía las cabeceras corretas.
+        header("Content-Type: image/png");
+        header("Content-Length: " . filesize($name));
+
+        // vuelca la imagen y detiene el script.
+        fpassthru($fp);
+        exit;
     }
 }

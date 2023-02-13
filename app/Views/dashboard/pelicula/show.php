@@ -13,7 +13,15 @@
     <h3>Imagénes</h3>
     <ul>
         <?php foreach ($imagenes as $imagen) : ?>
-            <li><?= $imagen->imagen ?></li>
+            <li>
+                <img src="/uploads/peliculas/<?= $imagen->imagen; ?>" alt="" width="150">
+                <form action="<?= route_to('pelicula.borrar_imagen', $imagen->id) ?>" method="POST">
+                    <button type="submit">Borrar</button>
+                </form>
+                <form action="<?= route_to('pelicula.descargar_imagen', $imagen->id) ?>" method="GET">
+                    <button type="submit">Descargar</button>
+                </form>
+            </li>
         <?php endforeach ?>
     </ul>
 
