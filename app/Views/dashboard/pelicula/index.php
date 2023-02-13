@@ -45,7 +45,10 @@
                     </form>
                 </td>
             </tr>
-        <?php endforeach; ?>
+        <?php endforeach; ?>   
+
     </table>
+
+    <?php echo $pager->links(); ?>
 
     <?php $this->endSection(); ?>

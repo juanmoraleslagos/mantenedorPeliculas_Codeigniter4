@@ -20,7 +20,7 @@
             </th>
             <th>
                 Categoría
-            </th>       
+            </th>
             <th>
                 Opciones
             </th>
@@ -29,7 +29,7 @@
             <tr>
                 <td><?php echo $etiqueta->id; ?></td>
                 <td><?php echo $etiqueta->titulo; ?></td>
-                <td><?php echo $etiqueta->categoria; ?></td>                
+                <td><?php echo $etiqueta->categoria; ?></td>
                 <td>
                     <a href="/dashboard/etiqueta/show/<?php echo $etiqueta->id; ?>">Mostrar</a>
                     <a href="/dashboard/etiqueta/edit/<?php echo $etiqueta->id; ?>">Editar</a>
@@ -42,5 +42,7 @@
             </tr>
         <?php endforeach; ?>
     </table>
+
+    <?php echo $pager->links(); ?>
 
     <?php $this->endSection(); ?>

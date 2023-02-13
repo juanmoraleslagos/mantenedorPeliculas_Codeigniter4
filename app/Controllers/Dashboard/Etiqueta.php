@@ -128,7 +128,9 @@ class Etiqueta extends BaseController
 
         // Creando data.
         $data = [
-            'etiquetas' => $etiquetaModel->select('etiquetas.*, categorias.titulo as categoria')->join('categorias', 'categorias.id = etiquetas.categoria_id')->find(),
+            'etiquetas' => $etiquetaModel->select('etiquetas.*, categorias.titulo as categoria')->join('categorias', 'categorias.id = etiquetas.categoria_id')
+                ->paginate(5),
+            'pager' => $etiquetaModel->pager
         ];
 
         // Enviando Datos A La Vista.

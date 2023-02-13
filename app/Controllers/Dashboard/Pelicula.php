@@ -140,7 +140,9 @@ class Pelicula extends BaseController
 
         // Creando data.
         $data = [
-            'peliculas' => $peliculaModel->select('peliculas.*, categorias.titulo as categoria')->join('categorias', 'categorias.id = peliculas.categoria_id')->find(),
+            'peliculas' => $peliculaModel->select('peliculas.*, categorias.titulo as categoria')->join('categorias', 'categorias.id = peliculas.categoria_id')
+            ->paginate(5),
+            'pager' => $peliculaModel->pager
         ];
 
         // Enviando Datos A La Vista.

@@ -13,11 +13,11 @@ class Categoria extends BaseController
     {
         // Instanciando Y Ocupando Metodos.
         $categoriaModel = new CategoriaModel();
-        $categorias = $categoriaModel->findAll();
 
         // Enviando Datos A La Vista.
         return view('/dashboard/categoria/index', [
-            'categorias'  => $categorias,
+            'categorias'  => $categoriaModel->paginate(5),
+            'pager'       => $categoriaModel->pager
         ]);
     }
 
