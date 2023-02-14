@@ -7,7 +7,7 @@
     <!-- mostrando listado de errores -->
     <?php echo view('helpers/formulario-error'); ?>
 
-    <!-- Formulario Creación Película -->
+    <!-- Formulario Creación Película -->    
     <form action="/dashboard/pelicula/create" method="POST">
         <!-- Incluyendo Formulario Editar -->
         <?php echo view('templates/formulario', ['operacion' => 'Crear']); ?>

@@ -9,7 +9,7 @@
     <?php $this->section('contenido'); ?>
 
     <a href="/dashboard/categoria/new">Crear</a>
-    <table>
+    <table class="table">
         <tr>
             <th>
                 Id
@@ -26,12 +26,12 @@
                 <td><?php echo $categoria->id; ?></td>
                 <td><?php echo $categoria->titulo; ?></td>
                 <td>
-                    <a href="/dashboard/categoria/show/<?php echo $categoria->id; ?>">Mostrar</a>
-                    <a href="/dashboard/categoria/edit/<?php echo $categoria->id; ?>">Editar</a>
+                    <a href="/dashboard/categoria/show/<?php echo $categoria->id; ?>" class="btn btn-secondary btn-sm">Mostrar</a>
+                    <a href="/dashboard/categoria/edit/<?php echo $categoria->id; ?>" class="btn btn-primary btn-sm">Editar</a>
 
                     <!-- Creando Formulario Para Eliminar -->
                     <form action="/dashboard/categoria/delete/<?php echo $categoria->id; ?>" method="POST">
-                        <button type="submit">Borrar</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
                     </form>
                 </td>
             </tr>
